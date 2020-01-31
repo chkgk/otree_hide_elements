@@ -7,7 +7,7 @@
 
 {% block content %}
     
-    <p id="something_to_hide">This text is only visible for {{ Constants.display_time}} seconds after the first time the page is loaded.</p>
+    <p id="something_to_hide">This text is only visible for {{ Constants.element_display_time }} seconds after the first time the page is loaded.</p>
 
     {% next_button %}
 
@@ -15,17 +15,17 @@
 
 {% block scripts %}
     <script type="text/javascript">
-        var element_available_until_ms = {{ element_available_until|json }} * 1000;
+        var element_hiding_time_ms = {{ element_hiding_time|json }} * 1000;
                 
         // check if it has to be hidden immediately on page load or if we need to check repeatedly
         var now = new Date();
-        if (now.getTime() > element_available_until_ms) {
+        if (now.getTime() > element_hiding_time_ms) {
             $('#something_to_hide').hide();
         } else {
             // check every second if current time is larger then end time.
             interval = setInterval(function() {
                 var now = new Date();
-                if (now.getTime() > element_available_until_ms) {
+                if (now.getTime() > element_hiding_time_ms) {
                     $('#something_to_hide').hide();
                     clearInterval(interval);
                 }

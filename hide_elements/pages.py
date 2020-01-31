@@ -5,13 +5,13 @@ from datetime import datetime
 
 class MyPage(Page):
     def vars_for_template(self) -> dict:
-        # the first time the page is loaded, set chat start time
-        if self.player.element_start_time == 0:
-            self.player.element_start_time = int(datetime.timestamp(datetime.now()))
+        # the first time the page is loaded, set element first seen time
+        if self.player.element_first_seen == 0:
+            self.player.element_first_seen = int(datetime.timestamp(datetime.now()))
 
-        element_end_time = self.player.element_start_time + Constants.display_time
+        element_hiding_time = self.player.element_first_seen + Constants.element_display_time
         return {
-            "element_available_until": element_end_time
+            "element_hiding_time": element_hiding_time
         }
 
 

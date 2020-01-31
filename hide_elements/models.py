@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    display_time = 15 # seconds
+    element_display_time = 15 # seconds
 
 class Subsession(BaseSubsession):
     pass
@@ -34,4 +34,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    element_start_time = models.IntegerField(initial=0)
+    element_first_seen = models.IntegerField(initial=0)
